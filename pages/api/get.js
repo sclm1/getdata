@@ -1,4 +1,9 @@
-const API_BASE_URL: string = 'https://grecom.taobao.com/recommend?pageSize=20&language=vi&type=shop®ionId=VN&_input_charset=UTF-8&_output_charset=UTF-8&pageNo=';
+
+
+// Export handler cho serverless function
+export default async function handler(req: Request, res: Response) {
+  try {
+    const API_BASE_URL: string = 'https://grecom.taobao.com/recommend?pageSize=20&language=vi&type=shop®ionId=VN&_input_charset=UTF-8&_output_charset=UTF-8&pageNo=';
 const BATCH_SIZE: number = 50;
 const APP_IDS: number[] = [42704, 42050];
 
@@ -144,10 +149,6 @@ async function fetchAllProducts(): Promise<Product[]> {
   console.log('Hoàn tất lấy dữ liệu từ tất cả API.');
   return allProducts;
 }
-
-// Export handler cho serverless function
-export default async function handler(req: Request, res: Response) {
-  try {
     const products = await fetchAllProducts();
     res.status(200).json(products);
   } catch (error: any) {
